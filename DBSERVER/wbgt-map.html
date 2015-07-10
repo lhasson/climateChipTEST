@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored Mon, 01 Dec 2014 03:18:51 GMT, Cactus Software -->
+<head runat="server">
+   <title>Bootstrap WBGT Calculator</title>
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css?v=1.31" />
+   <link rel="stylesheet" type="text/css" href="js/jqplot/jquery.jqplot.min.css" />
+   <link rel="stylesheet" type="text/css" href="css/wbgt-styles.css?v=1.31" />
+   <script type="text/javascript">var Page = "Original";</script>
+   <script type="text/javascript" src="js/markers/weatherstations.js"></script>
+   <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="js/utilities.js?v=1.31"></script>
+   <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+   <script language="Javascript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+    <link rel="icon" type="image/png" href="favicon.html"/>
+   <!-- CSS and JS for our code -->
+   <script src="js/jquery-gmaps-latlon-picker.js?v=1.31"></script>
+   <!--[if lt IE 9]><script type="text/javascript" src="js/jqplot/excanvas.min.js"></script><![endif]-->
+   <script type="text/javascript" src="js/jqplot/jquery.jqplot.min.js"></script>
+   
+   <script type="text/javascript" src="js/jqplot/plugins/jqplot.trendline.js"></script>
+   <!--<script type="text/javascript" src="js/jqplot/plugins/jqplot.cursor.min.js"></script>
+   <script type="text/javascript" src="js/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+   <script type="text/javascript" src="js/jqplot/plugins/jqplot.highlighter.min.js"></script>-->
+   <script type="text/javascript" src="js/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+   <script type="text/javascript" src="js/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+   <script type="text/javascript" src="js/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+   <script type="text/javascript" src="js/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+   <script type="text/javascript" src="js/graphing.js?v=1.31"></script>
+   <script type="text/javascript" src="js/graphingobject.js?v=1.31"></script>
+   <script type="text/javascript" src="js/wbgt-map.js?v=1.31"></script>
+   <script type="text/javascript" src="js/markers/markerclusterer_compiled.js"></script>
+   <script type="text/javascript" src="js/markers/markerhandler.js"></script>
+   
+</head>
+<body>
+<fieldset class="gllpLatlonPicker google-maps">
+   <p>Type a location in the left box below (e.g. "Delhi, India" or "29, 77" for lat/long) and click Search. Alternatively, simply scroll around and zoom the map below, then click on the desired location. <span id="divCookies" style="visibility: hidden">Enable cookies for a better user experience.</span></p>
+   <div id="divMapSearch"><input type="text" id="gllpSearchField" class="gllpSearchField" />
+   <input type="button" class="gllpSearchButton btn" value="Search" /></div>
+   <div id="divGridCell"></div>
+   <div id="divParameter">
+      <b>Parameter:</b><br />
+      <select id="lstParameter">
+         <option value="Max_Temp">Maximum Temperature</option>
+         <option value="Mean_Temp">Mean Temperature</option>
+         <option value="Min_Temp">Minimum Temperature</option>
+         <option value="Mean_Dewpoint">Mean Dew Point</option>
+         <option value="Max_WBGT">Maximum WBGT</option>
+         <option value="Mean_WBGT">Mean WBGT</option>
+         <option value="Max_UTCI">Maximum UTCI</option>
+         <option value="Mean_UTCI">Mean UTCI</option>
+      </select>
+   </div>
+   <div id="divChartType">
+      <b>Chart Type:</b><br />
+      <select id="lstMonth">
+            <option value="0">Annual Average</option>
+            <option value="01">January</option>
+            <option value="02">February</option>
+            <option value="03">March</option>
+            <option value="04">April</option>
+            <option value="05">May</option>
+            <option value="06">June</option>
+            <option value="07">July</option>
+            <option value="08">August</option>
+            <option value="09">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+            <option value="-1">Monthly Distribution</option>
+         </select>
+   </div>
+   <div id="divTempType">
+      <b>Temperature Unit:</b><br />
+      <select id="lstTempType">
+      <option value="C">Celsius</option>
+      <option value="F">Fahrenheit</option>
+   </select>
+   </div>
+   
+	<div class="gllpMap">Google Maps</div>
+   
+	<div style="display: none">
+      lat/lon:
+		<input type="text" id="txtLatitude" readonly class="gllpLatitude" value="20" />
+		/
+		<input type="text" id="txtLongitude" readonly class="gllpLongitude" value="20" />
+		zoom:
+		<input type="text" class="gllpZoom" value="3" />
+		<input type="button" class="gllpUpdateButton" value="update map">
+	</div>
+   
+	<div id="divGraphContainer">
+		<input id="btnSaveGraph" class="btn" style="bottom: -92px;" type="button" value="Save this Graph as an Image" />
+
+		<div id="spinner">
+			<img src="img/loading.gif" alt="Loading..." />
+		</div>
+		<div id="jqPlotGraph"></div>   
+		<div id="graphnote" class="chart-footer">Note: When interpreting charts that display dew-point temperature, or values derived from it, i.e. WBGT and UTCI, note that dew-point temperatures below 0 ºC are often not reliable.</div>
+	</div>
+   
+	<div id="maplegend" class="chart-footer">
+		<div style="margin-bottom: 10px;">
+			<input id="showstations" type="checkbox" /> Show weather stations. 
+			<input id="showclosest" type="checkbox" /> Find closest weather station.
+		</div>
+
+	</div>
+					
+</fieldset>
+<br />
+
+<form id="frmjqPlot" name="frmjqPlot" method="post" action="jqplot-save.php">
+	<input id="imgdata" name="imgdata" value="" /><input id="name" name="name" />
+</form>
+
+<p class="footer">Source data for this page: CRU TS3.1, Climatic Research Unit, University of East Anglia, Norwich, United Kingdom <a target="_blank" href="http://www.cru.uea.ac.uk/">http://www.cru.uea.ac.uk</a><br />The data presented on this page has been prepared by a small, charitable organisation. While all care has been taken, the authors cannot not be held responsible for consequences resulting from inaccurate information.<br /><br />
+<div id="cactus-footer">
+	<div id="left-cactus"></div>
+	<div id="right-cactus">
+		<a class="clear-cell-action">Clear cell selection</a>
+	</div>
+	<div id="center-cactus">
+		Powered by Cactus Software, web development &amp; hosting, Nelson. <a target="_blank" href="http://www.cactus.net.nz/">www.cactus.net.nz</a>
+	</div>
+</div>
+    
+<div id="divExplainWBGT" class="modal hide fade">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>WBGT Explained</h3>
+	</div>
+	<div class="modal-body">
+		<p>Heat exposure for a human depends on the temperature, humidity, wind speed, solar radiation, clothes worn and the intensity of the work.  We use two heat indexes: WBGT (wet bulb globe temperature) that has been used for decades and has solid empirical backing; UTCI (Universal Thermal Climate Index) is a modern heat stress index developed from a physiological model.</p>
+		<h2>Wet Bulb Globe Temperature (WBGT)</h2>
+		<p>When the body generates heat (by work) faster than it can lose it, the core body temperature rises. While some increase in core temperature above 37°C is acceptable, an increase beyond 39°C creates health risks, which vary from person to person, depending on ethnic group, age, gender, the duration of high heat exposure, and the degree of acclimatisation.  International Standards Organisation (ISO) sets guidelines to keep core body temperature at 38°C.  It uses WBGT as the heat stress index to specify recommended rest/work cycles at different physical work intensities (ISO Standard 7243).</p>
+		<p><img class="scaleimage" src="img/WBGT_scale.png" alt="WBGT Scale Explanation" /></p>
+		<p>As solar radiation and wind speed are very variable from day to day (and hour to hour), we calculate indoor WBGT (no solar radiation and constant 1m/s wind).  Outdoor WBGT is then estimated by adding a value to the indoor WBGT (approx.. 2.5C) that depends on the month and the location.</p>
+		<p><i>References</i><br />Lemke, B., and Kjellstrom,T. 2012. Calculating Workplace WBGT from Meteorological Data: A Tool for Climate Change Assessment, Industrial Health, 50, 267–278.</p>
+		<p>ISO (1989) Hot environments − Estimation of the heat stress on working man, based on the WBGT-index (wet bulb globe temperature). ISO Standard 7243. International Standards Organization, Geneva</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+	</div>
+</div>
+
+<div id="divExplainUTCI" class="modal hide fade">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>UTCI Explained</h3>
+	</div>
+	<div class="modal-body">
+		<p>Heat exposure for a human depends on the temperature, humidity, wind speed, solar radiation, clothes worn and the intensity of the work.  We use two heat indexes: WBGT (wet bulb globe temperature) that has been used for decades and has solid empirical backing; UTCI (Universal Thermal Climate Index) is a modern heat stress index developed from a physiological model.</p>
+		<h2>Universal Thermal Climate Index (UTCI)</h2>
+		<p><img class="scaleimage" src="img/UTCI_scale.png" alt="UTCI Scale Explanation" /></p>
+		<p><i>References</i><br /></p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+	</div>
+</div>
+   <div id="scrollAnchor"></div>
+ <!--<div id="outputX"></div>-->
+</body>
+</html>

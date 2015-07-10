@@ -1,0 +1,596 @@
+p {
+    font-size: 14px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+#lookupinputs {
+    overflow: auto;
+    width: 100%;
+}
+
+.gllpMap {
+    width: 417px;
+    height: 447px;
+    margin-top: 10px;
+    float: left;
+}
+
+#container {
+   width: 960px;
+   margin: 0 auto;
+   height: 1600px;
+}
+
+#divMapSearch {
+   float: left;
+}
+
+#divGridCell {
+   float: left;
+   margin-top: -19px;
+   margin-left: 10px;
+}
+
+#divParameter, #divChartType, #divTempType {
+    float: left;
+    margin-left: 10px;
+    margin-top: -14px;
+}
+
+#datePicker {
+    float: right;
+    margin-top: 10px;
+}
+
+    #datePicker select {
+        width: 145px;
+    }
+
+    #datePicker label {
+        font-weight: bold;
+       
+    }
+
+#historicResults td{
+    text-align: right;
+}
+
+#historicResults td.tdLabel {
+   width: 170px;
+}
+
+#divLookupGridResultResult {
+    margin-top: -230px;
+}
+
+.gllpSearchButton {
+    margin: -10px 0 0 0px;
+}
+
+
+#divLookupGridResultResult h2 {
+    width: 700px;
+}
+
+#jqPlotThirty, #jqPlotMonthly, #jqPlotGraph {
+   width:50%;
+   height: 400px;
+   float: left;
+}
+
+#frmjqPlot, #frmjqPlotMonthly {
+   display: none;
+}
+
+#graphs {
+   position: relative;
+   height: 430px;
+   margin-bottom: 40px;
+   margin-top: -10px;
+}
+
+#btnSaveMonthlyGraph {
+   position:absolute;
+   bottom: -40px;
+   right: 20px;
+}
+
+#btnSaveGraph {
+   position:absolute;
+   right: 0;
+}
+
+.graphbutton {
+   height: 24px;
+   padding-right: 19px;
+   background-image: url(../img/graphs-bar-2.png);
+   background-repeat: no-repeat;
+   display: block;
+   background-position: right center;
+   font-size: 0.8em;
+   padding-top: 3px;
+   padding-left: 3px;
+   color: #0088CC;
+   cursor: pointer;
+}
+
+.footer {
+   text-align: center;
+   font-size: 14px;
+   font-style: oblique;
+   margin-top: 0px;
+}
+
+.chart-footer {
+   text-align: center;
+   font-size: 0.9em;
+   font-style: oblique;
+   margin-top: 0px;
+}
+
+.my-jqplot-title {
+   position: absolute;
+    left: auto;
+   top:auto;
+   bottom: 40px;
+   right: 15px;
+   color: red;
+   font-size: 0.9em;
+   font-weight: bold;  
+}
+
+.jqplot-title {
+   font-size: 0.9em;
+}
+
+.graphexplain{
+    top: 2px;
+    color: #DC002F;
+    cursor: pointer;
+    display: block;
+    font-size: 0.95em;
+    right: 6px;
+    position: absolute;
+}
+
+.graphexplain:hover {
+   text-decoration: underline;
+}
+
+.modal{
+   margin: -250px 0 0 -450px;
+   width: 900px;
+   top: 20px;
+}
+
+.modal.fade.in {
+    top: 350px;
+}
+
+.scaleimage {
+   height: 125px;
+}
+
+#scalecontainermonthly {
+   position: absolute;
+   top: 42px;
+   height: 310px;
+   width: 20px;
+   z-index: -1;
+   overflow: hidden;
+}
+
+#scalecontainer{
+   position: absolute;
+   top: 41px;
+   z-index: -1;
+   overflow: hidden;
+}
+
+   #scalecontainer.monthly {
+       height: 342px;
+       left: 25px;
+       width: 30px;
+   }
+
+   #scalecontainer.thirty {
+       height: 307px;
+       left: 22px;
+       width: 25px;
+   }
+
+#scalehovercontainer {
+   position: absolute;
+   top: 41px;
+   height: 342px;
+   width: 30px;
+   left: 25px;
+}
+
+.scalediv {
+   position: absolute;
+   width: 100%;
+   z-index: -1;
+}
+
+   .scalediv.hover {
+      z-index: 101;
+      width: 30px;
+      background-color: rgba(255,255,255,0.01); /* Hack to fix hover issue in IE - http://stackoverflow.com/questions/7070457/z-index-of-canvas-in-ie-9-problem */
+   }
+
+.scaledivexplain {
+   display:none;
+   position: absolute;
+   top: -207px;
+   left: 0;
+   z-index: 100;
+   padding: 10px;
+   border-radius: 10px;
+   width: 470px;
+   height: 185px;
+}
+
+.scaledivexplain h2{
+   margin: 0;
+   color: black;
+}
+
+.hoverimage {
+   height: 107px;
+   width: 50%;
+}
+
+.utciscaledivexplain {
+   display:none;
+   position: absolute;
+   top: -268px;
+   left: -483px;
+   z-index: 100;
+   padding: 10px;
+   width: 940px;
+   height: 185px;
+}
+
+.utcihoverimage {
+   width: 940px;
+}
+
+#jqPlotMonthly .jqplot-title{
+   font-size: 1em;
+}
+
+#scalehovercontainermonthly .scaledivexplain {
+   left: -225px;
+}
+
+#scalehovercontainermonthly .utciscaledivexplain {
+   left: -480px;
+}
+
+#scrollAnchor {
+   position: absolute;
+   top: 285px;
+}
+
+.jqplot-yaxis-label {
+   color: red;
+}
+
+#jqPlotThirty, #jqPlotMonthly, #jqPlotGraph {
+    float: left;
+    height: 416px;
+    width: 484px;
+}
+
+#gllpSearchField {
+   width: 175px;
+}
+
+#lstTempType {
+   width: 130px;
+}
+
+#lstParameter, #lstMonth {
+   width: 183px;
+}
+
+#lstParameter {
+	font-size: 0.9em;
+}
+
+#divGraphContainer {
+   float: left;
+   position: relative;
+   border: solid 1px #ddd;
+   padding: 15px;
+   margin-top: 10px;
+   margin-left: 15px;
+}
+
+.jqplot-yaxis {
+   min-width: 26px;
+}
+
+
+#graphnote {
+    bottom: -50px;
+    left: -4px;
+    position: absolute;
+    width: 526px;
+}
+
+#graphnote-model {
+    bottom: -105px;
+    left: -4px;
+    position: absolute;
+    width:560px;
+}
+
+.scrollfix{
+   line-height: 1.35;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#maplegend{
+   clear: both;
+   padding-top: 10px;
+   width: 417px;
+}
+
+#divModelSelects label {
+    margin-left: 0px;
+}
+
+#divModelSelects input {
+    margin-top: -1px;
+}
+
+#cactus-footer{
+	width:100%;
+}
+#left-cactus{
+	float:left;
+	width:15%;
+}
+#right-cactus{
+	float:right;
+	width:15%;
+	text-align: right; 
+	cursor: pointer;
+	font-size: 14px;
+}
+#right-cactus a{
+	color: #FD8A16;
+}
+#center-cactus{
+	margin:0 auto;
+	width:70%;
+	text-align: center;
+}
+
+#spinner img{
+position: absolute;
+margin: auto;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+}
+	
+.tg  {
+	border-collapse:collapse;
+	border-spacing:0;
+	margin-left: 10px;
+}
+
+.tg td {
+	border:none;
+	overflow:hidden;
+	word-break:normal;
+}
+
+.tg th {
+	border:none;
+	overflow:hidden;
+	word-break:normal;
+	font-size: 14px;
+	width: 58px;
+	padding-left:10px;
+}
+.tg .tg-s6z2 {
+	text-align:center
+}
+
+.tg-000e {
+	padding-top: 23px;
+}
+
+.tg-00xx {
+	width: 105px;
+	text-align: left;
+}
+.tg label {
+	margin-bottom: 0px !important;
+}
+
+.tg-00xs {
+	text-align: cemter;
+} 
+
+.tg-00t {
+	width: 16px;
+} 
+
+.tg-031f {
+	font-size: 1.2em;
+}
+
+.tg-031e {
+	font-weight: bold;
+	
+}
+
+#lstYearBracket {
+  width: 100px;
+  font-size: 0.9em;
+  height: 26px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 10px;
+}
+
+#dataTable {
+	padding-top: 10px;
+}  
+ 
+.modal-header { 
+	border-bottom: 1px solid #FFF !important;
+
+}
+.modal-header h4 { 
+	padding-left: 20px;
+	color: #f8931f;
+}
+
+#popupTable {
+	border:1px solid #C0C0C0;
+	border-collapse:collapse;
+	padding:5px;
+	margin: 0 auto;
+}
+
+#popupTable th {
+	border:1px solid #C0C0C0;
+	padding:5px;
+}
+
+#popupTable td {
+	border:1px solid #C0C0C0;
+	padding: 5px 20px 5px 20px;
+	text-align: center;
+}
+
+#popupTable .firstCol {
+	padding: 5px 20px 5px 5px !important;
+	font-weight: bold;
+	text-align: left;
+}
+
+#popupTable th::-moz-selection , td::-moz-selection { /* Code for Firefox */
+    background: transparent !important;
+}
+
+#popupTable th::selection , td::selection {
+    background: transparent !important;
+}
+
+.modal-backdrop.in {
+    opacity: 0.5 !important;
+}
+
+.modal-body {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;	
+}
+
+.close {
+	font-size:30px;
+}
+
+#noDataMsg {
+	display: none;
+	text-align: center;
+	margin-top: 10px;
+	color: red;
+	font-weight: bold;
+	font-style: italic;
+}
+
+#btnShowTable {
+	position:absolute;
+	bottom: -140px;
+	right: 220px;
+}
+
+.selectall {
+	cursor:pointer;
+	color: #0088cc;
+}
+
+.selectall:hover {
+    text-decoration:underline;
+}
+
+#copyMsg {
+	padding-top: 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #FD8A16;
+}
+
+#tableLeg {
+	text-align: left;
+}
+
+#footer-notes {
+	font-size: 14px !important;
+}
+
+#lstLineType {
+	width: 110px;
+	font-size: 0.9em;
+	height: 26px;
+	margin: auto;
+	position: absolute;
+	left: 355px;
+	top: 368px;
+	right: 0;
+	margin-bottom: 10px;
+}
+
+#modelHeaderTable {
+  position: absolute;
+  left: 120px;
+ }
+ 
+#divNote {
+	clear: both;
+	width: 526px;
+}
+
+.tg-000 {
+	width: 100px;
+}
+.tg-001 {
+	width: 70px;
+}  
+.tg-002 {
+	width: 70px;
+}  
+.tg-003 {
+	width: 60px;
+}  
+.tg-004 {
+	width: 70px;
+}  
+
+#rcpHeaderTable {
+	padding-top: 16px;
+	float: left;
+}
+
+#rcpHeaderTable label {	
+	margin-bottom: 1px;
+}
+
+#slopes {
+	padding-top: 20px;
+}

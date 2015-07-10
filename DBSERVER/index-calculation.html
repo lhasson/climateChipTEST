@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+   <title>Bootstrap WBGT Calculator</title>
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+
+   <link rel="stylesheet" type="text/css" href="css/wbgt-styles.css" />
+   <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="js/utilities.js"></script>
+   <script type="text/javascript" src="js/index-calculation.js"></script>
+</head>
+<body>
+<p>To perform a WBGT and a UTCI shade heat stress calculation enter a temperature and humidity value below and click the Calculate button.</p>   
+<label for="txtTemperature">Enter temperature</label>
+<input type="text" id="txtTemperature" />
+<label class="radio inline"><input type="radio" name="radTemperature" id="radCelcius" value="C" checked="checked" />&deg;C</label>
+<label class="radio inline"><input type="radio" name="radTemperature" id="radFarenheit" value="F" />&deg;F</label>
+<label for="txtHumidity">Enter humidity</label>
+<input type="text" id="txtHumidity" />
+<label class="radio inline"><input type="radio" name="radHumid" id="radDewPoint" value="D" checked="checked" />Dewpoint (&deg;C)</label>
+<label class="radio inline"><input type="radio" name="radHumid" id="radHumidity" value="H" />Humidity (%)</label>
+<label class="radio inline"><input type="radio" name="radHumid" id="radVapour" value="V" />Vapour Pressure (Millibars)</label>
+<br />
+<input type="button" id="btnCalculate" class="btn" value="Calculate" />
+<div id="divWBGTOutput"></div>
+   <br />
+   <h5>Calculation methods</h5>
+   <p>UTCI is calculated using the method described on <a target="_parent" href="http://www.utci.org">www.utci.org</a></p>
+   <p>The WBGT heat stress is calculated by the Liljegren method where climatic variables of temperature, humidity, solar radiation and wind speed are used in a rational thermodynamic heat exchange model.<br />Approximations:  no direct sunlight, wind speed of 1m/s.</p>
+   <p>Formula are for indoor conditions or outdoors in the shade.</p>
+   <p>A wind speed of 1m/s was chosen because working people are moving arms/legs generating an apparent wind speed of at least 1m/s.  Higher wind speeds at warm temperatures do not have a significant effect on WBGT.</p>
+   <p>The Liljegren method is described in:  Liljegren et al (2008) “Modeling the wet bulb globe temperature using standard meteorological measurements”  J Occup Environ Hyg  5 (10) 645-55.  An analysis of the Liljegren method, the effect of wind speed and formulas used can be found in <a target="_parent" href="http://www.jniosh.go.jp/en/indu_hel/pdf/IH_50_4_267.pdf">Lemke & Kjellstrom (2012) "Calculating workplace WBGT from meteorological data" Ind Health 50(4) page 267-78</a></p>
+<p class="footer">Powered by Cactus Software, web development & hosting, Nelson. <a target="_blank" href="http://www.cactus.net.nz">www.cactus.net.nz</a></p>
+</body>
+</html>

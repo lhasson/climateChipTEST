@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+
+
+<script type="text/javascript">
+$( document ).ready(function() {
+
+$("#hideX").click(function(){
+  	 //$("#hideme").addClass("fadein");
+      //  $('#hideme').css('visibility','visible').hide().fadeIn("slow");
+       // $("#hideme").fadeIn("slow", function() {
+$("#hideme").hide().css({visibility: "visible"}).fadeIn(1500).delay(5000);
+
+$("#hideme").fadeOut("slow", function() {
+    $(this).show().css({visibility: "hidden"});
+});
+
+
+});
+    //setTimeout(function(){
+      //  $("#hideme").addClass("fadeout	");
+   // }, 2000);
+
+});
+</script>
+<style>
+#hideme{
+    border:solid 1px #000;
+    background:#ccc;
+    padding:20px;
+	 visibility:hidden;
+}
+
+
+@-webkit-keyframes fadeout{
+    0%{opacity:1;visibility:visible;}
+    99%{opacity:0;}
+    100%{opacity:0;visibility: hidden;}
+}
+.fadeout {
+    -webkit-animation:fadeout 1s linear;
+    visibility:hidden;
+}
+@-webkit-keyframes fadein{
+    0%{opacity:0;visibility:visible;}
+    100%{opacity:1;}
+}
+.fadein {
+    -webkit-animation:fadein 1s linear;
+	    visibility:visible;
+
+}
+
+.fadeinS {
+   
+	    visibility:visible;
+
+}
+</style>
+<body>
+ <div id="hideme">click me</div>
+<div>This will not be moved by the fadeout.</div>
+<button id="hideX" value="hit" >HIT</button>
+</body>
+</html>
